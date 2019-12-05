@@ -11,7 +11,7 @@ import static java.sql.Types.NULL;
 
 public class Tests extends TestConfig{
 
-    @Test
+    @Test // create a fresh booking with predefined data
     public void createBooking(){
 
         Response response = given().body(jsonBody).log().uri()
@@ -21,7 +21,7 @@ public class Tests extends TestConfig{
         assert id != NULL;
     }
 
-    @Test
+    @Test // update a booking with predefined data using token
     public void updateBooking(){
         String cook = "token="+getToken();
         given().body(jsonBodyUpdate).log().uri().header("Cookie", cook)
@@ -29,7 +29,7 @@ public class Tests extends TestConfig{
                 .then().spec(responseSpecificationForPut).log().body();
     }
 
-    @Test
+    @Test // find booking by the first name and check that it has expected data
     public void getBookingByID(){
 
         Response resp =
@@ -40,7 +40,7 @@ public class Tests extends TestConfig{
                 .then().spec(responseSpecificationForGetJane).log().body();
     }
 
-    @Test
+    @Test // delete a booking and check it's deleted
     public void deleteBooking(){
         int id = 1;
         String cook = "token="+getToken();
